@@ -20,7 +20,7 @@ const LoginScreen = () => {
     if (userInfo) {
       history.push("/mynotes");
     }
-  }, [userInfo]);
+  }, [userInfo, history]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

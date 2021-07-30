@@ -14,10 +14,15 @@ const MyNotes = () => {
   const [loading, setLoading] = useState(false);
   const [errorDelete, setErrorDelete] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [successDelete, setSuccessDelete] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  // Loading Notes Function
 
   const listNotes = async () => {
     try {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      setUserName(userInfo.name);
       const config = {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -38,6 +43,33 @@ const MyNotes = () => {
       setLoading(false);
     }
   };
+  const deleteHandler = async (id) => {
+    if (window.confirm("Do you want to delete?")) {
+      try {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        };
+
+        setLoadingDelete(true);
+        const { data } = await axios.delete(
+          `http://localhost:3030/api/notes/${id}`,
+          config
+        );
+        setLoadingDelete(false);
+
+        if (data) {
+          setSuccessDelete(!successDelete);
+        }
+      } catch (error) {
+        setErrorDelete(error.response.message);
+        setLoadingDelete(false);
+      }
+    }
+  };
 
   const history = useHistory();
   const userInfo = localStorage.getItem("userInfo");
@@ -48,10 +80,10 @@ const MyNotes = () => {
     } else {
       listNotes();
     }
-  }, [userInfo]);
+  }, [userInfo, successDelete, history]);
 
   return (
-    <MainScreen title="Welcome back...">
+    <MainScreen title={`Welcome back ${userName} ...`}>
       <Link to="/createNote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           Create New Note
@@ -64,7 +96,6 @@ const MyNotes = () => {
       )}
       {loading && <Loading />}
       {loadingDelete && <Loading />}
-      {console.log(notes)}
 
       {notes &&
         notes.map((note) => (
@@ -94,7 +125,7 @@ const MyNotes = () => {
                   <Button
                     variant="danger"
                     className="mx-2 pb-0"
-                    // onClick={() => deleteHandler(note._id)}
+                    onClick={() => deleteHandler(note._id)}
                   >
                     Delete
                   </Button>
@@ -103,9 +134,9 @@ const MyNotes = () => {
 
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
-                  <h4>
-                    <Badge variant="success">Category - {note.category}</Badge>
-                  </h4>
+                  <h5>
+                    <Badge bg="success">Category - {note.category}</Badge>
+                  </h5>
                   <blockquote className="blockquote mb-0">
                     <ReactMarkdown>{note.content}</ReactMarkdown>
                     <footer className="blockquote-footer">

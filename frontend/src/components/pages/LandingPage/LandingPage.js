@@ -13,7 +13,7 @@ const LandingPage = () => {
     if (userInfo) {
       history.push("/mynotes");
     }
-  }, [userInfo]);
+  }, [userInfo,history]);
 
   return (
     <div className="main">

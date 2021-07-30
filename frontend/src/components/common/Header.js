@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <Navbar bg="primary" expand="lg" variant="light">
       <Container>
-        <Navbar.Brand href="/">Note Zipper</Navbar.Brand>
+        <Navbar.Brand href="/">Note Keeper</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
@@ -27,7 +27,7 @@ const Header = () => {
           <Nav>
             <Nav.Link href="/mynotes">MY NOTES</Nav.Link>
             <NavDropdown title="PROFILE" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">MY PROFILE</NavDropdown.Item>
+              <NavDropdown.Item href="/myprofile">MY PROFILE</NavDropdown.Item>
 
               <NavDropdown.Divider />
               <NavDropdown.Item
