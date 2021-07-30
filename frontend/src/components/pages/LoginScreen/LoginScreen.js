@@ -15,12 +15,12 @@ const LoginScreen = () => {
 
   const history = useHistory();
 
-  // const userInfo = localStorage.getItem("userInfo");
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push("/mynotes");
-  //   }
-  // }, [history, userInfo]);
+  const userInfo = localStorage.getItem("userInfo");
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

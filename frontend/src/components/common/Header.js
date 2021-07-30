@@ -33,6 +33,7 @@ const Header = () => {
               <NavDropdown.Item
                 onClick={() => {
                   localStorage.removeItem("userInfo");
+                  localStorage.removeItem("notes");
                   history.push("/");
                 }}
               >

@@ -8,12 +8,12 @@ const LandingPage = () => {
 
   const history =useHistory();
 
-  // const userInfo = localStorage.getItem("userInfo");
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push("/mynotes");
-  //   }
-  // }, [userInfo]);
+  const userInfo = localStorage.getItem("userInfo");
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [userInfo]);
 
   return (
     <div className="main">

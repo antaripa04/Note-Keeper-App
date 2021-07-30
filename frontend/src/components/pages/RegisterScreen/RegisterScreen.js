@@ -27,7 +27,7 @@ const RegisterScreen = () => {
   //   if (userInfo) {
   //     history.push("/mynotes");
   //   }
-  // }, [userInfo, history]);
+  // }, [userInfo]);
 
   const postDetails = (pics) => {
     if (
