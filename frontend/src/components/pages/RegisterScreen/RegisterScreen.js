@@ -81,6 +81,7 @@ const RegisterScreen = () => {
           config
         );
         setLoading(false);
+        history.push("/mynotes");
         localStorage.setItem("userInfo", JSON.stringify(data));
 
       } catch (error) {
@@ -151,7 +152,7 @@ const RegisterScreen = () => {
               {picMessage}
             </ErrorMessage>
           )}
-          <Form.Group className="mb-3">
+          <Form.Group className="mt-3">
             <Form.Label>Profile Picture</Form.Label>
             <Form.Control
               onChange={(e) => postDetails(e.target.files[0])}
