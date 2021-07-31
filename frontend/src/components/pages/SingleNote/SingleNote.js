@@ -38,9 +38,12 @@ function SingleNote() {
       setCategory(data.category);
       setDate(data.updatedAt);
     };
-
+    if(!userInfo){
+        history.push("/");
+    }else{
     fetching();
-  }, []);
+    }
+  }, [userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

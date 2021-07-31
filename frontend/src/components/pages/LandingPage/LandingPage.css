@@ -13,7 +13,7 @@
     min-height: 93vh;
     display: flex;
     align-items: center;
-    background-image: url("LandingPage.jpg");
+    background-image: url("Background.jpg");
     background-position: center;
     background-size: cover;
   }
