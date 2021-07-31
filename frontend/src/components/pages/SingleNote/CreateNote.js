@@ -51,7 +51,7 @@ function CreateNote() {
       setLoading(false);
       history.push("/mynotes");
     } catch (error) {
-      setError(error.response.message);
+      setError(error.response.data.message);
       setLoading(false);
     }
     console.log(title);
