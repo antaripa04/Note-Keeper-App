@@ -5,7 +5,7 @@ import Loading from "../../common/Loading";
 import ErrorMessage from "../../common/ErrorMessage";
 import ContextAwareToggle from "./ContextAwareToggle";
 import { Button, Card, Badge, Accordion } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
+import parse from "html-react-parser";
 import axios from "axios";
 
 const MyNotes = () => {
@@ -103,7 +103,6 @@ const MyNotes = () => {
             <Card style={{ margin: 10 }}>
               <Card.Header style={{ display: "flex" }}>
                 <span
-                  // onClick={() => ModelShow(note)}
                   style={{
                     color: "black",
                     textDecoration: "none",
@@ -138,7 +137,7 @@ const MyNotes = () => {
                     <Badge bg="success">Category - {note.category}</Badge>
                   </h5>
                   <blockquote className="blockquote mb-0">
-                    <ReactMarkdown>{note.content}</ReactMarkdown>
+                    {parse(note.content)}
                     <footer className="blockquote-footer">
                       Created on{" "}
                       <cite title="Source Title">
