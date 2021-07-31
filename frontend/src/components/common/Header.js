@@ -3,22 +3,20 @@ import {
   NavDropdown,
   Nav,
   Container,
-  Form,
-  FormControl,
 } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 const Header = () => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const history = useHistory();
-  useEffect(() => console.log("mounted"), [userInfo, history]);
+  useEffect(() => console.log(), [userInfo, history]);
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("notes");
     history.push("/");
   };
   return (
-    <Navbar bg="primary" expand="lg" variant="light">
+    <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="/">Note Keeper</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
