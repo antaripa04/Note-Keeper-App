@@ -6,21 +6,16 @@ import ErrorMessage from "../../common/ErrorMessage";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
+import { useHistory } from "react-router-dom";
 import "./SingleNote.css";
+import axios from "axios";
 
-function CreateNote({ history }) {
+function CreateNote() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  //   const dispatch = useDispatch();
-
-  //   const noteCreate = useSelector((state) => state.noteCreate);
-  //   const { loading, error, note } = noteCreate;
-
-  //   console.log(note);
 
   const resetHandler = () => {
     setTitle("");
@@ -28,17 +23,39 @@ function CreateNote({ history }) {
     setContent("");
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    // dispatch(createNoteAction(title, content, category));
-    // if (!title || !content || !category) return;
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    // resetHandler();
-    // history.push("/mynotes");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/");
+    }
+  }, [history, userInfo]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      setLoading(true);
+      const { data } = await axios.post(
+        `http://localhost:3030/api/notes/create`,
+        { title, content, category },
+        config
+      );
+      setLoading(false);
+      history.push("/mynotes");
+    } catch (error) {
+      setError(error.response.message);
+      setLoading(false);
+    }
     console.log(title);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -47,6 +64,7 @@ function CreateNote({ history }) {
           <Card.Header>Create a new Note</Card.Header>
           <Card.Body>
             <Form onSubmit={submitHandler}>
+              {loading && <Loading />}
               {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
               <Form.Group controlId="title">
                 <Form.Label>Title</Form.Label>
@@ -72,9 +90,7 @@ function CreateNote({ history }) {
               {content && (
                 <Card className="mt-3">
                   <Card.Header>Note Preview</Card.Header>
-                  <Card.Body>
-                   {parse(content)}
-                  </Card.Body>
+                  <Card.Body>{parse(content)}</Card.Body>
                 </Card>
               )}
               <Form.Group controlId="content" className="mt-3">
