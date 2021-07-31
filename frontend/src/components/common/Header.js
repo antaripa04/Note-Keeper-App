@@ -27,7 +27,7 @@ const Header = () => {
           <Nav>
             <Nav.Link href="/mynotes">MY NOTES</Nav.Link>
             <NavDropdown title="PROFILE" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/myprofile">MY PROFILE</NavDropdown.Item>
+              <NavDropdown.Item href="/profile">MY PROFILE</NavDropdown.Item>
 
               <NavDropdown.Divider />
               <NavDropdown.Item

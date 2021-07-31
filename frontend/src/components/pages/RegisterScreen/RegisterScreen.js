@@ -80,11 +80,9 @@ const RegisterScreen = () => {
           { name, pic, email, password },
           config
         );
-
-        console.log(data);
-
-        localStorage.setItem("userInfo", JSON.stringify(data));
         setLoading(false);
+        localStorage.setItem("userInfo", JSON.stringify(data));
+
       } catch (error) {
         setError(error.response.data.message);
         setLoading(false);
