@@ -43,7 +43,7 @@ function SingleNote() {
     }else{
     fetching();
     }
-  }, [userInfo]);
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -96,7 +96,7 @@ function SingleNote() {
     <>
       <MainScreen title="Create a Note">
         <Card>
-          <Card.Header>Create a new Note</Card.Header>
+          <Card.Header>Edit Note</Card.Header>
           <Card.Body>
             <Form onSubmit={submitHandler}>
               {loading && <Loading />}
