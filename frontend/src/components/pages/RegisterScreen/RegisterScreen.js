@@ -83,6 +83,7 @@ const RegisterScreen = () => {
         setLoading(false);
         history.push("/mynotes");
         localStorage.setItem("userInfo", JSON.stringify(data));
+        window.location.reload();
 
       } catch (error) {
         setError(error.response.data.message);

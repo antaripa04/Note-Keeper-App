@@ -44,6 +44,8 @@ const LoginScreen = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
 
       setLoading(false);
+      history.push("/mynotes");
+      window.location.reload();
     } catch (error) {
       setError(error.response.data.message);
       setLoading(false);

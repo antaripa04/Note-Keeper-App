@@ -14,6 +14,7 @@ const Header = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("notes");
     history.push("/");
+    window.location.reload();
   };
   return (
     <Navbar bg="primary" expand="lg" variant="dark">
